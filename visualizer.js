@@ -1,5 +1,5 @@
 const fftSize = 1024;
-const barSpacing = 1;
+const barSpacing = 0;
 const barColorBase = [100, 50, 50];
 
 const audioFileInput = document.getElementById('audioFile');
