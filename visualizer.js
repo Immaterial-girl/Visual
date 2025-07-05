@@ -1,11 +1,15 @@
+const fftSize = 1024;
 const barResolution = 1;
-const fftSize = 256;
 const barSpacing = 1;
 const barColorBase = [100, 50, 50];
 
 const audioFileInput = document.getElementById('audioFile');
 const canvas = document.getElementById('visualizer');
 const ctx = canvas.getContext('2d');
+
+function mapRange(value, inMin, inMax, outMin, outMax) {
+  return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+}
 
 audioFileInput.addEventListener('change', function () {
   const file = this.files[0];
@@ -36,10 +40,11 @@ audioFileInput.addEventListener('change', function () {
 
         const barWidth = (canvas.width / bufferLength) * barResolution;
         let x = 0;
+        const maxBarHeight = canvas.height * 0.9;
 
         for (let i = 0; i < bufferLength; i++) {
-          const barHeight = dataArray[i];
-          const red = barHeight + barColorBase[0];
+          const barHeight = mapRange(dataArray[i], 0, 255, 0, maxBarHeight);
+          const red = Math.min(barHeight + barColorBase[0], 255);
           const green = barColorBase[1];
           const blue = barColorBase[2];
 
