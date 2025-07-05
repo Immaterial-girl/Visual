@@ -1,4 +1,4 @@
-const barResolution = 4;
+const barResolution = 1;
 const fftSize = 256;
 const barSpacing = 1;
 const barColorBase = [100, 50, 50];
