@@ -7,6 +7,21 @@ const canvas = document.getElementById('visualizer');
 const ctx = canvas.getContext('2d');
 const barCountSlider = document.getElementById('barCountSlider');
 
+const canvas = document.getElementById('visualizer');
+const ctx = canvas.getContext('2d');
+
+// Fix for high-DPI (Retina) displays
+const dpr = window.devicePixelRatio || 1;
+const rect = canvas.getBoundingClientRect();
+
+// Set the actual drawing buffer size
+canvas.width = rect.width * dpr;
+canvas.height = rect.height * dpr;
+
+// Scale the context so your drawings are crisp
+ctx.scale(dpr, dpr);
+
+
 function mapRange(value, inMin, inMax, outMin, outMax) {
   return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 }
